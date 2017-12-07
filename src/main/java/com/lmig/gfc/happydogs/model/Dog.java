@@ -1,23 +1,35 @@
 package com.lmig.gfc.happydogs.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "happydogs")
+@Table(name = "dog")
 public class Dog {
 
 	@Id
 	@GeneratedValue(generator = "dog_id_seq", strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "dog_id_seq", sequenceName = "dog_id_seq")
 	private Long id;
+
+	// Mapped by - which variable in the other class
+	// should I look at for this mapping?
+	@OneToMany(mappedBy = "dog")
+	private List<Meal> meals;
+
+	// Side that does not own the relationship gets the mapped by
+	@ManyToMany
+	private List<Person> owners;
 
 	@Column(length = 15, nullable = false)
 	private String breed;
@@ -128,6 +140,22 @@ public class Dog {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Meal> getMeals() {
+		return meals;
+	}
+
+	public void setMeals(List<Meal> meals) {
+		this.meals = meals;
+	}
+
+	public List<Person> getOwners() {
+		return owners;
+	}
+
+	public void setOwners(List<Person> owners) {
+		this.owners = owners;
 	}
 
 }
