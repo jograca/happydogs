@@ -1,5 +1,6 @@
 package com.lmig.gfc.happydogs.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,13 @@ public class PeopleApiController {
 	}
 
 	@GetMapping("")
-	public List<Person> getAll() {
-		return personRepo.findAll();
+	public List<PersonView> getAll() {
+		List<Person> persons = personRepo.findAll();
+		ArrayList<PersonView> personViews = new ArrayList<PersonView>();
+
+		for (Person person : persons) {
+			personViews.add(new PersonView(person));
+		}
+		return personViews;
 	}
 }

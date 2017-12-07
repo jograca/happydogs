@@ -27,14 +27,21 @@ public class SeedData {
 		mealRepo.save(new Meal(sid, "Alpo"));
 		mealRepo.save(new Meal(milo, "Alpo"));
 
-		Person owner = new Person();
-		owner.setFirstName("Barry");
-		personRepo.save(owner);
+		Person mom = new Person();
+		mom.setFirstName("Kit");
+		personRepo.save(mom);
+
+		Person suavohue = new Person();
+		suavohue.setFirstName("Joe");
+		personRepo.save(suavohue);
 
 		ArrayList<Person> owners = new ArrayList<Person>();
-		owners.add(owner);
-		wicket.setOwners(owners);
-		dogRepo.save(wicket);
+		owners.add(suavohue);
+		digby.setOwners(owners);
+		// wicket.setOwners(owners);
+
+		dogRepo.save(digby);
+		// dogRepo.save(wicket);
 	}
 
 }
