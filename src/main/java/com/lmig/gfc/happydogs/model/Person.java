@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -22,6 +24,7 @@ public class Person {
 
 	// Side that does not own the relationship gets the mapped by
 	@ManyToMany(mappedBy = "owners")
+	@JsonIgnore
 	private List<Dog> pets;
 
 	@Column(nullable = false)
