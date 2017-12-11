@@ -106,8 +106,33 @@ public class DogsApiControllerTests {
 	}
 
 	@Test
-	public void update_with_a_valid_id_updates_a_single_dog() {
+	public void update_sets_id_of_dog_calls_save_and_returns_dog() {
+		// Arrange
+		Dog dog = new Dog();
+		when(dogRepo.save(dog)).thenReturn(dog);
 
+		// Act
+		Dog actual = controller.update(dog, 1L);
+
+		// Assert
+		assertThat(actual).isSameAs(dog);
+		verify(dogRepo, times(1)).save(dog);
+		assertThat(dog.getId().equals(1L));
+	}
+
+	@Test
+	public void delete_finds_dog_by_id_deletes_it_from_repo_and_returns_dog() {
+		// Arrange
+		Dog dog = new Dog();
+		when(dogRepo.findOne(1L)).thenReturn(dog);
+
+		// Act
+		Dog actual = controller.delete(1L);
+
+		// Assert
+		assertThat(actual).isSameAs(dog);
+		verify(dogRepo).findOne(1L);
+		verify(dogRepo).delete(dog);
 	}
 
 }
