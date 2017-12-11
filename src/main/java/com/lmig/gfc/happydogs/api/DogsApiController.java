@@ -28,15 +28,10 @@ public class DogsApiController {
 	}
 
 	@GetMapping("")
-	public List<Dog> getAll(@RequestParam(required = false) String color,
-			@RequestParam(required = false) String gender) {
-		if (color != null) {
-			return dogRepo.findByColorIgnoringCase(color);
-		}
+	public List<Dog> getAll(@RequestParam(required = false) String gender) {
 		if (gender != null) {
 			return dogRepo.findByGenderIgnoringCase(gender);
 		}
-
 		return dogRepo.findAll();
 	}
 
@@ -47,7 +42,7 @@ public class DogsApiController {
 	}
 
 	@GetMapping("{id}")
-	public Dog getFirstDog(@PathVariable Long id) {
+	public Dog getOne(@PathVariable Long id) {
 		return dogRepo.findOne(id);
 	}
 
