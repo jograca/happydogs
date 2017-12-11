@@ -33,7 +33,6 @@ public class OwnersApiController {
 		Person person = personRepo.findOne(personId);
 
 		if (!dog.getOwners().contains(person)) {
-			// dog.addOwner(person);
 			dog.getOwners().add(person);
 			dogRepo.save(dog);
 		}
